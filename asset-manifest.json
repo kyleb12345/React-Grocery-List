@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/static/js/main.258e3e3f.js",
-    "index.html": "/index.html",
-    "main.258e3e3f.js.map": "/static/js/main.258e3e3f.js.map"
+    "main.js": "/React-Grocery-List/static/js/main.258e3e3f.js",
+    "index.html": "/React-Grocery-List/index.html",
+    "main.258e3e3f.js.map": "/React-Grocery-List/static/js/main.258e3e3f.js.map"
   },
   "entrypoints": [
     "static/js/main.258e3e3f.js"
