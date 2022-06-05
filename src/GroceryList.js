@@ -5,8 +5,8 @@ import { Divider } from '@mui/material';
 import Items from './Items'
 
 
-export default function GroceryList({todos, removeTodo, toggleTodo}) {
-  return (
+export default function GroceryList({todos, removeTodo, toggleTodo, editTodo}) {
+  if(todos.length) return (
     <Paper>
         <List>
         {todos.map(todo =>(
@@ -18,11 +18,13 @@ export default function GroceryList({todos, removeTodo, toggleTodo}) {
                     completed={todo.completed} 
                     removeTodo={removeTodo}
                     toggleTodo={toggleTodo}
+                    editTodo={editTodo}
                     />
             <Divider />
             </>
         ))}
         </List>
     </Paper>
-  )
+  );
+  return null;
 }

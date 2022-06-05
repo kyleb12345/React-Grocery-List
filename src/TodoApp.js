@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ListForm from './ListForm';
 import GroceryList from './GroceryList';
 import { Typography } from '@mui/material';
@@ -9,14 +9,16 @@ import { Grid } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function TodoApp() {
-    const initialList = [
-        { id: 1, task: "Buy Milk", completed: false},
-        { id: 2, task: "Buy Cheese", completed: false},
-        { id: 3, task: "Buy Yogurt", completed: false},
-        { id: 4, task: "Buy all dairy products", completed: false}
-    ];
+
+    const initialList = JSON.parse(window.localStorage.getItem("todos") || "[]")
+
 
     const [todos, setTodos] = useState(initialList);
+
+    useEffect(() => {
+        window.localStorage.setItem("todos", JSON.stringify(todos));
+    }, [todos]);
+
     const addTodo = newTodoText => {
         setTodos([...todos, {id: uuidv4(), task: newTodoText, completed: false}]);
     };
@@ -32,6 +34,13 @@ export default function TodoApp() {
             );
             setTodos(updatedTodos);
     };
+
+    const editTodo = (todoId, newTask) => {
+        const updatedTodos = todos.map(todo => 
+            todo.id === todoId ? {...todo, task: newTask } : todo
+            );
+            setTodos(updatedTodos);
+    }
 
   return (
     <Paper style={{
@@ -50,7 +59,12 @@ export default function TodoApp() {
         <Grid container style={{ marginTop: "1rem" }} justifyContent="center">
             <Grid item xs={11} md={8} lg={4}>
         <ListForm addTodo={addTodo}/>
-        <GroceryList todos={todos} removeTodo={removeTodo} toggleTodo={toggleTodo} />
+        <GroceryList 
+        todos={todos} 
+        removeTodo={removeTodo} 
+        toggleTodo={toggleTodo}
+        editTodo={editTodo}
+        />
         </Grid>
         </Grid>
     </Paper>
